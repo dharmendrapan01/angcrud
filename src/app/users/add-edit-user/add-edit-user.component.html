@@ -1,0 +1,30 @@
+<form class="example-form" [formGroup]="add_user">
+    <h1>{{(uid ? 'Update User' : 'Add User')}}</h1>
+    <div class="img_style">
+        <img src="{{img_url}}" width="100%" height="100%">
+        <button mat-fab color="primary" (click)="image.click()"><mat-icon>add</mat-icon></button>
+        <input type="file" #image (change)="onImageChange(image.files)" accept=".jpe, .png">
+    </div>
+    
+    <input type="hidden" name="user_id" formControlName="user_id" *ngIf="uid">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" name="user_name" formControlName="user_name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Name" name="user_email" formControlName="user_email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" name="user_password" formControlName="user_password">
+    </mat-form-field>
+
+    <div class="example-button-row">
+        <button mat-raised-button routerLink="/view_user">Back</button>
+        <button mat-raised-button color="warn" (click)="reset()" *ngIf="!uid">Reset</button>
+        <button mat-raised-button color="primary" (click)="(uid) ? updateUser() : onSave()" [disabled]="!add_user.valid">{{(uid ? 'Update' : 'Add')}}</button>
+    </div>
+</form>
